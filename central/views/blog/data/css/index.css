@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #ffe9ea;
+    font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", Tahoma, Arial, STHeiti, sans-serif;
+}
+
+div {
+    position: absolute;
+}
+
+.blog-wechat-statistics-page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+/* .blog-wechat-statistics-page .area {
+    position: absolute;
+    top: 4%;
+    height: 10%;
+    left: 5%;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    animation: slideright-keyframes 1000ms ease-in-out 0ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+.blog-wechat-statistics-page .area > .logo {
+    font-size: 0.5rem;
+    width: 0.5rem;
+    display: block;
+}
+
+.blog-wechat-statistics-page .area > h2.area-title {
+    font-size: 0.36rem;
+    border-bottom: solid 0.04rem #f64b4b;
+    
+    position: relative;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    margin: 0 0.2rem;
+}
+
+.blue .area > .logo {
+	color: #00fffb;
+}
+
+.blue .area > h2.area-title {
+	border-bottom: solid 0.04rem #00fffb;
+    text-shadow: 1px 1px 0.04rem rgba(0, 233, 255, 0.40);
+} */
+
+.gallery-blog-wechat-statistics {
+    top: 14%;
+    left: 5%;
+    right: 5%;
+    bottom: 10%
+}
+
+.blog-wechat-statistics-page .this-day-pane {
+    top: 0;
+    left: 0;
+    right: 50%;
+    bottom: 50%;
+    animation: slideright-keyframes 2000ms ease-in-out 1000ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+.blog-wechat-statistics-page .this-week-pane {
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 50%;
+    animation: slideleft-keyframes 2000ms ease-in-out 3000ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+.blog-wechat-statistics-page .this-month-pane {
+    top: 50%;
+    left: 0;
+    right: 50%;
+    bottom: 0;
+    animation: slideright-keyframes 2000ms ease-in-out 5000ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+.blog-wechat-statistics-page .all-in-one-pane {
+    top: 50%;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+    animation: slidebottomright-keyframes 2000ms ease-in-out 7000ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+@keyframes slideright-keyframes {
+    0% {
+        transform: translate(-2rem, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideleft-keyframes {
+    0% {
+        transform: translate(2rem, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slidebottomright-keyframes {
+    0% {
+        transform: translate(2rem, 2rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}

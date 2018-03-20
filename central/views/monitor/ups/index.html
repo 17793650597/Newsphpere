@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>融媒体指挥中心</title>
+		<link rel="shortcut icon" href="../../../images/favicon.ico" />
+		<link rel="stylesheet" href="../../../3rd/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../../3rd/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../../../css/default.css" />
+    	<link rel="stylesheet" href="./css/index.css"/>
+		<script type="text/javascript" src="../../../3rd/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../../../3rd/jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../../../3rd/echarts/echarts.3.1.9.min.js"></script>
+		<script type="text/javascript" src="../../../3rd/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../../js/nova.utils.js"></script>
+		<script type="text/javascript" src="../../../js/util.js"></script>
+		<script type="text/javascript" src="../../../js/central.proxy.js"></script>
+		<script type="text/javascript" src="./js/index.js"></script>
+
+		<style>
+		</style>
+	</head>
+
+	<body>
+	
+		<div class="cloud-page">
+			<div class="area">
+				<div class="logo fa fa-tv"></div>
+				<h2 class="area-title">UPS监控</h2>
+			</div>
+			<div class="gallery-cloud">
+				<div class="left-pane" id="ups1">
+					<div class="pane-title">
+						<span class="shape color-yellow"></span>
+						<span class="shape color-yellow"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+						UPS1
+						<span class="shape"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+					</div>
+					<div class="pane-content">
+						<div class="pane-up">
+							<div class="up-title state-title">运行状态</div>
+							<div class="up-content">
+								<table class="table">
+									<tr>
+										<th></th>
+										<th></th>
+										<th class="table-l"></th>
+										<th class="table-l"></th>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td class="table-l"></td>
+									</tr>
+									<tr>
+										<td class="table-b"></td>
+										<td class="table-b"></td>
+										<td class="table-b"></td>
+										<td class="table-l"></td>
+									</tr>
+								</table>
+								<table class="table">
+									<tr>
+										<th class="table-n table-inz">主输入</th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">整流充电器</span></th>
+										<th class="table-n"></th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">逆变器</span></th>
+										<th class="table-n" style="visibility:hidden;">新奥特新奥</th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">负载</span></th>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td><span class="table-s cell-bg2">电池</span></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td class="table-inp">旁路输入</td>
+										<td></td>
+										<td></td>
+										<td style="position:relative;top:12%;"><span class="table-s cell-bg3">旁路</span></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="pane-down">
+							<div class="down-topleft">
+								<div class="up-title left-title">电池状态</div>
+								<div class="display-battery">
+									<span class="battery-inner">充电量<span class="battery-num">45</span>%</span>
+								</div>
+								<div class="topleft-content battery-state">
+									<div class="voltage">
+										<span class="width-modify">输入电压状态:</span>
+										<span class="ups1-Va battery-bd">A相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Vb battery-bd">B相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Vc battery-bd">C相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+									</div>
+									<div class="current">
+										<span class="width-modify">输入电流状态:</span>
+										<span class="ups1-Aa battery-bd">A相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Ab battery-bd">B相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Ac battery-bd">C相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="down-topright">
+								<div class="up-title right-title">工作状态</div>
+								<div class="topright-content work-state row">
+									<div class = "col-md-12">
+										<span class="ups1-workb col-md-6">电池输出</span>
+										<span class="ups1-workc col-md-6">旁路输出</span>
+									</div>
+									<div class = "col-md-12">
+										<span class="ups1-worka col-md-12">逆变器状态</span>
+									</div>
+								</div>
+							</div>
+							<div class="down-down">
+								<div class="up-title title-margin">报警状态</div>
+								<div class="downdown-content warn-state">
+									<div class="ups1-warntotal a">
+										<div class="b">
+											<div class="c">
+												<div class="d">
+													<p class="text">总报警</p>
+												</div>
+												<p class="y"><span class="y1"></span></p>
+											</div>
+										</div>
+									</div>
+									<div class="line row1">
+										<div class="tiles">
+											<span class="ups1-warn1">设备故障</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn2">电池故障</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn3">电池供电</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+									<div class="line row2">
+										<div class="tiles">
+											<span class="ups1-warn4">旁路供电</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn5">负载过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn6">变压器温度过高</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+									<div class="line row3">
+										<div class="tiles">
+											<span class="ups1-warn7">逆变器电压过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn8">旁路电压过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn9">旁路温度过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn10">电压输出低</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+								</div>
+								<div class="bottom-bar">
+									<div class="legend">
+										<span class="green bg1"></span>正常
+									</div>
+									<div class="legend">
+										<span class="yellow bg2"></span>报警
+									</div>
+									<div class="legend">
+										<span class="red bg3"></span>故障
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="right-pane" id="ups2">
+					<div class="pane-title">
+						<span class="shape color-yellow"></span>
+						<span class="shape color-yellow"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+						UPS2
+						<span class="shape"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+						<span class="shape"></span>
+					</div>
+					<div class="pane-content">
+						<div class="pane-up">
+							<div class="up-title state-title">运行状态</div>
+							<div class="up-content">
+								<table class="table">
+									<tr>
+										<th></th>
+										<th></th>
+										<th class="table-l"></th>
+										<th class="table-l"></th>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td class="table-l"></td>
+									</tr>
+									<tr>
+										<td class="table-b"></td>
+										<td class="table-b"></td>
+										<td class="table-b"></td>
+										<td class="table-l"></td>
+									</tr>
+								</table>
+								<table class="table">
+									<tr>
+										<th class="table-n table-inz">主输入</th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">整流充电器</span></th>
+										<th class="table-n"></th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">逆变器</span></th>
+										<th class="table-n" style="visibility:hidden;">新奥特新奥</th>
+										<th class="table-n table-a"><span class="table-s cell-bg1">负载</span></th>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td><span class="table-s cell-bg2">电池</span></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td class="table-inp">旁路输入</td>
+										<td></td>
+										<td></td>
+										<td style="position:relative;top:12%;"><span class="table-s cell-bg3">旁路</span></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="pane-down">
+							<div class="down-topleft">
+								<div class="up-title left-title">电池状态</div>
+								<div class="display-battery">
+									<span class="battery-inner">充电量<span class="battery-num">45</span>%</span>
+								</div>
+								<div class="topleft-content battery-state">
+									<div class="voltage">
+										<span class="width-modify">输入电压状态:</span>
+										<span class="ups1-Va battery-bd">A相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Vb battery-bd">B相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Vc battery-bd">C相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+									</div>
+									<div class="current">
+										<span class="width-modify">输入电流状态:</span>
+										<span class="ups1-Aa battery-bd">A相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Ab battery-bd">B相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+										<span class="ups1-Ac battery-bd">C相<i class="fa fa-circle margin-modify" aria-hidden="true"></i></span>
+									</div>
+								</div>
+							</div>
+							<div class="down-topright">
+								<div class="up-title right-title">工作状态</div>
+								<div class="topright-content work-state">
+									<div class = "col-md-12">
+										<span class="ups1-workb col-md-6">电池输出</span>
+										<span class="ups1-workc col-md-6">旁路输出</span>
+									</div>
+									<div class = "col-md-12">
+										<span class="ups1-worka col-md-12">逆变器状态</span>
+									</div>
+								</div>
+							</div>
+							<div class="down-down">
+								<div class="up-title title-margin">报警状态</div>
+								<div class="downdown-content warn-state">
+<!-- 										<span class=""><i class="fa fa-circle margin-modify" aria-hidden="true"></i>总报警</span> -->
+									<div class="ups1-warntotal a">
+										<div class="b">
+											<div class="c">
+												<div class="d">
+													<p class="text">总报警</p>
+												</div>
+												<p class="y"><span class="y1"></span></p>
+											</div>
+										</div>
+									</div>
+									<div class="line row1">
+										<div class="tiles">
+											<span class="ups1-warn1">设备故障</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn2">电池故障</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn3">电池供电</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+									<div class="line row2">
+										<div class="tiles">
+											<span class="ups1-warn4">旁路供电</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn5">负载过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn6">变压器温度过高</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+									<div class="line row3">
+										<div class="tiles">
+											<span class="ups1-warn7">逆变器电压过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn8">旁路电压过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn9">旁路温度过高</span><span class="warn-bar1"></span>
+										</div>
+										<div class="tiles">
+											<span class="ups1-warn10">电压输出低</span><span class="warn-bar1"></span>
+										</div>
+									</div>
+								</div>
+								<div class="bottom-bar">
+									<div class="legend">
+										<span class="green bg1"></span>正常
+									</div>
+									<div class="legend">
+										<span class="yellow bg2"></span>报警
+									</div>
+									<div class="legend">
+										<span class="red bg3"></span>故障
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

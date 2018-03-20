@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-title" content="长江云指挥调度系">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<title>融媒体指挥中心</title>
+<link rel="shortcut icon" href="./images/favicon.ico" />
+<link rel="stylesheet" href="3rd/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="3rd/font-awesome/css/font-awesome.min.css" />
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+.bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+.login-pane {
+	width: 50%;
+	height: 100%;
+	margin: 0 auto;
+	
+}
+.login-pane>table {
+	height: 100%;
+	width: 100%;
+}
+.login-td>div{
+	width: 100%;
+}
+.login-td button {
+	width: 100%;
+	font-size: 0.24rem;
+}
+.login-td .form-group {
+	margin: 0.3rem;
+}
+.login-pane .input-lg{
+    font-size: 0.2rem;
+}
+h2 {
+	text-align: center;
+	color: #fff;
+    font-size: 0.36rem;
+}
+.form-group p {
+	color: #fff;
+}
+.form-group p.error {
+	color: #f00;
+}
+#canvas {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+</style>
+<script type="text/javascript" src="./3rd/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="./3rd/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript">
+$(function(){
+	Utils.setPageFontSize(1920);
+	$('form[name=FormLogin]').submit(function(){
+		console.log($('#user').val());
+		$('#info').removeClass('error').html('正在登录...');
+		var user = {
+				principal: $('#user').val(),
+				password: $('#pwd').val(),
+				principalType: 'ID',
+				appName: 'PC'
+		};
+		$.ajax({
+			url		: './api/login',
+			type	: 'POST',
+			async	: true,
+			contentType : 'application/json; charset=UTF-8',
+			dataType: 'json',
+			data	: JSON.stringify(user),
+			success	: function(session){
+				$('#info').html('登录成功，正在跳转...');
+				console.log(session);
+				localStorage.setItem('nova.central.session', JSON.stringify(session));
+				location.href = "/central/";
+			},
+			error : function(jqXHR, textStatus, errorThrown){
+				if(jqXHR.status === 403) {
+					var msg = '登录失败:' + jqXHR.responseText;
+					$('#info').addClass('error').text(msg).attr('title', msg);
+					$('#user').focus();
+				} else {
+					var msg = '登录失败，详情:' + JSON.parse(jqXHR.responseText).message;
+					$('#info').addClass('error').text(msg).attr('title', msg);
+					$('#user').focus();
+				}
+			},
+			statusCode : {},
+			beforeSend: function() {
+			}
+		});
+		return false;
+	});
+	
+	
+	var canvas = document.getElementById('canvas');
+	if(!canvas){
+		return;
+	}
+	var	ctx = canvas.getContext('2d'), 
+		w = canvas.width = document.body.clientWidth, 
+		h = canvas.height = $('.bg').height(), 
+		hue = 217, 
+		count = 0, 
+		maxStars = 1200;
+	var stars = [];
+	
+	var canvas2 = document.createElement('canvas'), ctx2 = canvas2.getContext('2d');
+	canvas2.width = 100;
+	canvas2.height = 100;
+	var half = canvas2.width / 2, gradient2 = ctx2.createRadialGradient(half, half,
+			0, half, half, half);
+	gradient2.addColorStop(0.025, '#fff');
+	gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+	gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+	gradient2.addColorStop(1, 'transparent');
+	
+	ctx2.fillStyle = gradient2;
+	ctx2.beginPath();
+	ctx2.arc(half, half, half, 0, Math.PI * 2);
+	ctx2.fill();
+	
+	// End cache
+	
+	function random(min, max) {
+		if (arguments.length < 2) {
+			max = min;
+			min = 0;
+		}
+	
+		if (min > max) {
+			var hold = max;
+			max = min;
+			min = hold;
+		}
+	
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+	
+	function maxOrbit(x, y) {
+		var max = Math.max(x, y), diameter = Math.round(Math.sqrt(max * max + max
+				* max));
+		return diameter / 2;
+	}
+	
+	var Star = function() {
+	
+		this.orbitRadius = random(maxOrbit(w, h));
+		this.radius = random(60, this.orbitRadius) / 12;
+		this.orbitX = w / 2;
+		this.orbitY = h / 2;
+		this.timePassed = random(0, maxStars);
+		this.speed = random(this.orbitRadius) / 900000;
+		this.alpha = random(2, 10) / 10;
+	
+		count++;
+		stars[count] = this;
+	};
+	
+	Star.prototype.draw = function() {
+		var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX, y = Math
+				.cos(this.timePassed)
+				* this.orbitRadius + this.orbitY, twinkle = random(10);
+	
+		if (twinkle === 1 && this.alpha > 0) {
+			this.alpha -= 0.05;
+		} else if (twinkle === 2 && this.alpha < 1) {
+			this.alpha += 0.05;
+		}
+	
+		ctx.globalAlpha = this.alpha;
+		ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2,
+				this.radius, this.radius);
+		this.timePassed += this.speed;
+	};
+	
+	for (var i = 0; i < maxStars; i++) {
+		new Star();
+	}
+	
+	function animation() {
+		ctx.globalCompositeOperation = 'source-over';
+		ctx.globalAlpha = 0.8;
+		ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+		ctx.fillRect(0, 0, w, h);
+	
+		ctx.globalCompositeOperation = 'lighter';
+		for (var i = 1, l = stars.length; i < l; i++) {
+			stars[i].draw();
+		}
+	
+		window.requestAnimationFrame(animation);
+	}
+	
+	animation();
+});
+
+</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div class="bg">
+<div class="login-pane">
+	<table>
+		<tr><td class="login-td">
+			<div>
+<form class="form-horizontal" name="FormLogin">
+  <div class="form-group">
+    <div class="col-sm-12">
+      <h2 class="form-control-static">融媒体指挥中心</h2>
+  </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <input type="text" class="form-control input-lg" id="user" placeholder="用户名"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <input type="password" class="form-control input-lg" id="pwd" placeholder="密码"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <button class="btn btn-primary btn-lg" id="btn_login">登录</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-12">
+      <p class="form-control-static" id="info"></p>
+  </div>
+</form>
+			</div>
+		</td></tr>
+	</table>
+</div>
+</div>
+</body>
+</html>

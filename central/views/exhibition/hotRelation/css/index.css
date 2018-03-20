@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: black;
+    font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", Tahoma, Arial, STHeiti, sans-serif;
+}
+
+div {
+    position: absolute;
+}
+
+.report-statistics-page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+@keyframes slideright-keyframes {
+    0% {
+        transform: translate(-1rem, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+
+.gallery-report-statistics {
+    top: 10%;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+.area {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 90%
+}
+.area .area-title{
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 0;
+    bottom: 0
+    color: #00ceff;
+}
+
+.report-statistics-page .pie-pane {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.loading{
+    background: none;
+}

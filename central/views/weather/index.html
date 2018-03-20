@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>融媒体指挥中心 - 天气预报</title>
+	<link rel="shortcut icon" href="../../images/favicon.ico" />
+	<link rel="stylesheet" href="../../3rd/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../3rd/font-awesome/css/font-awesome.min.css" />
+  	<link rel="stylesheet" href="../../css/default.css" />
+    <link rel="stylesheet" href="./css/index.css"/>
+	<script type="text/javascript" src="../../3rd/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../../3rd/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../3rd/echarts/echarts.3.1.9.min.js"></script>
+	<script type="text/javascript" src="../../3rd/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../js/util.js"></script>
+	<script type="text/javascript" src="./js/index.js"></script>
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+	<div class="weather-forecast-page">
+		<!-- <div class="area">
+			<img class="logo" alt="LOGO" src="../../images/weather-forecast-logo.png"></img>
+			<h2 class="area-title">天气预报</h2>
+		</div> -->
+		<div class="area">
+	        <div class="logo fa fa-cloud"></div>
+	        <h2 class="area-title">天气预报</h2>
+	    </div>
+	    <div class="gallery-weather-forecast">
+	        <div class="left-pane">
+	        	<div class="pane-bg"></div>
+	        	<div class="city">
+	        		<select id="cities">
+	        		</select>
+	        	</div>
+	        	<div class="tmp">最低<span class="min-tmp">10</span>℃  最高<span class="max-tmp">19</span>℃</div>
+	        	<div class="tianqi">小雨转雷阵雨</div>
+	        	<div class="tianqi-logo"><img alt="天气图标"></div>
+	        	<div class="now-tmp-container"><span class="now-tmp">16</span></div>
+	        	<div class="next-day-tmp-container">
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+	        		<div class="next-day-tmp">
+		        		<div class="weekday">Monday</div>
+		        		<div class="weekday-tmp">
+		        			<span class="min-tmp">10</span>°
+		        			<span class="max-tmp">19</span>°
+		        		</div>
+	        		</div>
+				</div>
+	        </div>
+	        <div class="right-pane">
+	        	<div class="right-pane-title">
+					<h3>未来一周平均气温</h3>
+					<div class="arrow glyphicon glyphicon-chevron-right"></div>
+	       		</div>
+	       		<div class="top-right">
+	       			<div class="air-condition">
+						<div class="">空气质量</div>
+	       				<div><span class="value">69</span><span class="desc">良</span></div>
+	       				<div class="divide-line"></div>
+					</div>
+	       			<div class="date">
+	       				<div class="weekday-container"><span class="weekday">星期日</span><span class="clock glyphicon glyphicon-time"></span></div>
+	       				<div class="day">2016/01/01</div>
+	       				<div class="time">00:00am</div>
+					</div>
+				</div>
+				<div class="bottom-right">
+	       			<div class="bg-anim-container"></div>
+	       			<div class="next-6-day-tempr-container">
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+	       				<div class="day-tempr-item">
+		       				<div class="axis-y-line"></div>
+		       				<div class="item-body">
+			       				<div class="weekday">Mon</div>
+			       				<div class="weather-condition"><img alt="天气图标"></div>
+			       				<div class="tempr">19</div>
+		       				</div>
+	       				</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</body>
+
+</html>

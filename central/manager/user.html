@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+	<link rel="stylesheet" href="../3rd/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../3rd/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/default.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<style type="text/css">
+		.detail-body{
+		    display: flex;
+		    flex-direction: row;
+		    justify-content: space-around;
+		}
+		
+		.role-list {
+   			list-style: none;
+			list-style: none;
+		    flex-grow: 1;
+		    margin: 10px;
+		    border: 1px solid #ddd;
+		    overflow-y: auto;
+		}
+		
+		.role-list-item {
+			display: block;
+		    padding: 10px 0;
+		    border-bottom: solid 1px #eee;
+		    font-size: 16px;
+		}
+		
+		.role-list-item > label {
+			padding-right: 10px;
+		}
+		
+	</style>
+	<script type="text/javascript" src="../3rd/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../3rd/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/nova.utils.js"></script>
+	<script type="text/javascript" src="../js/nova.framework.js"></script>
+	<script type="text/javascript" src="js/user.js"></script>
+
+</head>
+<body id="page_user" class="mgr-page">
+	<div class="header">
+		<div class="pull-left toolbar">
+			<span class="check-all">
+				<label><input type="checkbox"> 全选 ( <span class="user-count"></span> )</label>
+			</span>
+			<div class="col-search">
+				<span class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+					<input type="search" class="form-control" name="TextSearch" placeholder="输入关键词过滤用户名" />
+				</span>
+			</div>
+			<span>
+				<button name="BtnCreate" class="btn btn-success">
+					<i class="fa fa-plus"></i> <span>新建</span>
+				</button>
+				<button name="BtnDelete" class="btn btn-danger">
+					<i class="fa fa-remove"></i> <span>删除</span>
+				</button>
+			</span>
+		</div>
+	</div>
+	<div class="list">
+		<ol></ol>
+	</div>
+	<div class="detail-div creator">
+		<div class="detail-title">
+			<h4>
+				<i class="fa fa-plus"></i><span>正在添加新用户</span>
+			</h4>
+			<div class="toolbar"></div>
+			<a href="javascript:;" class="close">×</a>
+		</div>
+		<div class="detail-body">
+			<form role="form">
+				<div class="input-group input-sm">
+					<span class="input-group-addon"><span class="required">*</span>账号:</span>
+					<input type="text" class="form-control" name="UserID" required
+								pattern="[0-9a-zA-Z\-_]+" placeholder="用于登录的用户ID" maxlength="50">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon"><span class="required">*</span>姓名:</span>
+					<input type="text" class="form-control" name="UserName" required placeholder="用于显示的用户名" maxlength="100">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon"><span class="required">*</span>初设密码:</span>
+					<input type="password" class="form-control" name="Password" required maxlength="100">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon"><span class="required">*</span>再输一遍:</span>
+					<input type="password" class="form-control" name="Password2" required maxlength="100">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">邮箱:</span>
+					<input type="email" class="form-control" name="EMail" placeholder=@ maxlength="1024">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">手机:</span>
+					<input type="text" class="form-control" name="Cellphone" maxlength="1024">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">固定电话:</span>
+					<input type="text" class="form-control" name="Telphone" maxlength="1024">
+				</div>
+				<div class="col-md-12">
+					<input type="submit" class="btn btn-primary" name="BtnSaveAndNext"
+									data-loading-text="正在保存用户信息" value="添加并继续" />
+					<input type="button" class="btn btn-link" name="BtnExit" value="关闭" />
+				</div>
+			</form>
+			<ol class="role-list">
+				<li class="role-list-item">
+					<label><input type="checkbox" class="role-checkbox">user</label>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class="detail-div editor">
+		<div class="detail-title">
+			<h4>
+				<i class="fa fa-edit"></i><span>正在编辑用户</span>
+			</h4>
+			<div class="toolbar"></div>
+			<a href="javascript:;" class="close">×</a>
+		</div>
+		<div class="detail-body">
+			<form>
+				<div class="static-group clearfix hide">
+					<span class="col-md-1 static-group-addon">所在部门:</span>
+					<span class="col-md-6" name="Department"></span>
+				</div>
+				<div class="col-md-12 hide" >
+					<label style="min-width: 120px;"><input type="checkbox" name="IsAdmin"> 管理员</label>
+					<label ><input type="checkbox" name="PasswordNeedChange"> 下次登录修改密码</label>
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">账号:</span>
+					<input type="text" class="form-control" name="UserID" required disabled placeholder="用于登录的用户ID">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon"><span class="required">*</span>姓名:</span>
+					<input type="text" class="form-control" name="UserName" required placeholder="用于显示的用户名" maxlength="100">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">邮箱:</span>
+					<input type="email" class="form-control" name="EMail" placeholder=@ maxlength="1024">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">手机:</span>
+					<input type="text" class="form-control" name="Cellphone" maxlength="1024">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">固定电话:</span>
+					<input type="text" class="form-control" name="Telphone" maxlength="1024">
+				</div>
+				<div class="input-group input-sm hide">
+					<span class="input-group-addon">通联部门:</span>
+					<input type="text" class="form-control" name="ClueOrgName" maxlength="1024">
+				</div>
+				<div class="input-group input-sm hide">
+					<span class="input-group-addon" title="使用场景：所创报题的来自属性…">聚类部门:</span>
+					<select class="form-control" name="BusinessOrg"></select>
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon">新密码</span>
+					<input type="password" class="form-control" name="Password" placeholder="请输入新密码" maxlength="100">
+				</div>
+				<div class="input-group input-sm">
+					<span class="input-group-addon"></span>
+					<input type="password" class="form-control" name="Password2" placeholder="再输一遍" maxlength="100">
+				</div>
+
+				<div class="col-md-12">
+					<input type="submit" class="btn btn-primary" name="BtnSaveAndExit"
+									data-loading-text="正在保存用户信息" value="保存并关闭" />
+					<input type="button" class="btn btn-link" name="BtnExit" value="不修改" />
+				</div>
+			</form>
+			<ol class="role-list">
+				<li class="role-list-item">
+					<label><input type="checkbox" class="role-checkbox">user</label>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+</body>
+</html>

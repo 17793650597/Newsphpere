@@ -1,0 +1,230 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", Tahoma, Arial, STHeiti, sans-serif;
+}
+.netPlayer-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+/* .netPlayer-page .area {
+    position: absolute;
+    top: 5%;
+    height: 10%;
+    left: 5%;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    animation: slideright-keyframes 1000ms ease-in-out 0s 1 normal;
+    animation-fill-mode: backwards;
+} */
+
+.netPlayer-page .area > .logo {
+    font-size: 0.5rem;
+    width: 0.5rem;
+    display: block;
+}
+
+/* .netPlayer-page .area > h2.area-title {
+    font-size: 0.36rem;
+    border-bottom: solid 0.04rem #f64b4b;
+    
+    position: relative;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    margin: 0 0.2rem;
+} */
+
+.blue .area > .logo {
+	color: #00fffb;
+}
+
+.blue .area > h2.area-title {
+	border-bottom: solid 0.04rem #00fffb;
+    text-shadow: 1px 1px 0.04rem rgba(0, 233, 255, 0.40);
+}
+.litchiblue .area > .logo {
+    color: #00fffb;
+}
+.litchiblue .area > h2.area-title {
+    border-bottom: solid 0.04rem #00fffb; 
+    text-shadow: 1px 1px 0.04rem rgba(0, 233, 255, 0.40);
+}
+.netPlayer-page .netPlayer-list-pane{
+	position: absolute;
+    top: 13%;
+    right: calc(5% + 0.7rem);
+    left: calc(5% + 0.7rem);
+    height: 82%;
+    z-index: 2;
+    padding: 0.1rem;
+    transition: all 1s ease-in-out;
+/*     overflow:hidden; */
+}
+.netPlayer-page .netPlayer-list {
+    padding: 0;
+    left: 10%;
+    width: 80%;
+    top: 0;
+    bottom: 0;
+/*     overflow: hidden; */
+    position: absolute;
+    color: #ffebea;
+    margin: 0.1rem 0;
+}
+.netPlayer-list .item {
+    width: 100%;
+    height: 17%;
+    position: relative;
+    transition: all 1000ms ease-in-out;
+    margin: 1.6% 0;
+    padding: 1%;
+}
+.netPlayer-list .item .item-left{
+    position: absolute;
+    left: 1%;
+    height: 100%;
+    width: 2.0rem;
+    margin: 0.5% 0;
+}
+.netPlayer-list .item .item-right{
+    position: absolute;
+    left: 19%;
+    margin: 0.5% 0;
+    height: 75%;
+    width: 78%;
+    font-size: 0.24rem;
+    font-family: 微软雅黑, "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", Tahoma, Arial, STHeiti, sans-serif;
+    display: flex;
+    align-items: center;
+	background: rgba(9,71,144,0.80);
+	border: 1px solid #00e9ff;
+	box-shadow: 0 0 4px 2px rgba(102,0,0,0.50);
+}
+.netPlayer-list .item .item-left .img-layer{
+	
+}
+.netPlayer-list .item .item-left .img-layer .photo{
+	width: 1.6rem;
+    height: 0.9rem;	
+}
+.netPlayer-list .item .item-right .item-title{
+	width: 70%;
+    display: inline-block;
+    margin: 0 2%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.netPlayer-list .item .item-right .time{
+	width: 28%;
+    display: inline-block;
+    color: #00cdff;
+}
+.netPlayer-list .item .top-left{
+	position: absolute;
+	color:#00cdff;
+    left: 2.2rem;
+    font-size: 0.4rem;
+    top: -0.14rem;
+    transform: rotateZ(-45deg);
+    -webkit-animation:none;
+    animation:none;
+}
+.netPlayer-list .item .bottom-right{
+	position: absolute;
+    font-size: 0.4rem;
+    right: 0.1rem;
+    bottom: -0.13rem;
+	color:#00cdff;
+    transform: rotateZ(135deg);
+    -webkit-animation:none;
+    animation:none;
+}
+.netPlayer-list .active.item{
+	border:1px solid #00d4ff;
+	box-shadow:0 0 12px 1px #00cdff;
+	left: -0.4rem;
+}
+.add-transition {
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
+}
+.modal-content .frame{
+	width:100%;
+	height:100%;
+}
+.litchiblue .title-detail-pane{
+	background-color:#fff;
+}
+
+
+.netPlayer-page .netPlayer-list-foot{
+    position: fixed;
+    bottom: 0.2rem;
+    left: 0;
+    color: #ffebea;
+    text-align: center;
+    right: 0;
+    font-size: 0.2rem	
+}
+
+.netPlayer-page .netPlayer-list-foot a{
+	text-decoration:none;
+	color:#ffebea;
+}
+.netPlayer-page .netPlayer-list-foot a:hover,.netPlayerrundown-container .netPlayer-list-foot a:active{
+	color:#ff5800;
+}
+/* .netPlayer-pane-out{
+		border: 1px solid #00caca;
+		width:90%;
+		height:96%;
+		margin:0 auto;
+		display: flex;
+		flex-direction:row;
+		justify-content:center;
+		align-items:center;
+		position: absolute;
+		top:2%;
+		left:5%;
+}
+.netPlayer-pane-mid{
+		border: 1px solid #00cacc;
+		width:99%;
+		height:100%;
+		margin:0 auto;
+		display: flex;
+		flex-direction:row;
+		justify-content:center;
+		align-items:center;
+}
+.netPlayer-pane-in{
+		border: 2px solid #00fffb;
+		width:97%;
+		height:98%;	
+		margin:0 auto;	
+} */
+
+ 
+
+ 
+ 

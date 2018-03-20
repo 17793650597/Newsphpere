@@ -1,0 +1,175 @@
+<style type="text/css">
+	label.col-sm-2{ text-align: right;line-height: 30px;margin: 0;}
+	.panel-body .form-group {overflow:auto; margin-bottom: 15px;}
+	.panel-body .btn.btn-tool {float: right; margin-right: 20px;}
+	.choice {font-size: 21px;}
+	.choice.choice-on{color: green;}
+	.choice.choice-off{color: red;}
+	
+	.modules-list {list-style: none; padding: 0; overflow: auto;}
+	.modules-list>li {padding: 5px 10px; float: left;}
+	.modules-list>li.active {background: #3b5998; color: #fff;}
+	.modules-list>li.active a {color: #fff;}
+	
+	.loading {position: fixed; top: 100px; left: calc(50% - 100px); z-index: 999; background: #fff; border: 2px solid #ccc;text-align: center;width: 200px;line-height: 80px;}
+</style>
+<div style="position: absolute; top:0; bottom: 0; left: 0; right: 0;overflow: auto">
+<div data-ng-if="loading" class="loading"><i class="fa fa-spin fa-spinner"></i> 正在加载...</div>
+
+<div class="panel panel-default" style="margin: 20px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">模块列表</h3>
+  </div>
+  <div class="panel-body">
+<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th width="15%">主键</th>
+			<th width="15%">名称</th>
+			<th width="10%">图标</th>
+			<th width="15%">是否为组合页面</th>
+			<th>路径</th>
+			<th></th>
+		</tr>
+		</thead>
+	<tbody>
+		<tr data-ng-repeat="row in List.data">
+			<td><a href="javascript:;" data-ng-click="Module.open(row)">{{row.name}}</a></td>
+			<td>{{row.caption}}</td>
+			<td><i class="{{row.icon}}"></i></td>
+			<td>{{row.combine.length>0?'是': '否'}}</td>
+			<td>{{row.url}}</td>
+			<td>
+				<a href="javascript:;" data-ng-click="Module.del(row)" style="color:red;"><i class="fa fa-trash"></i></a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-primary" data-ng-click="Module.add()"><i class="fa fa-plus"></i> 添加</button>
+<button class="btn btn-default" data-ng-click="refresh()"><i class="fa fa-refresh"></i> 刷新</button>
+</div>
+</div>
+
+</div>
+<div data-ng-if="Module.edit" class="panel panel-default"  style="position:absolute; z-index: 2; top: 0;left:0;bottom:0;right: 0;margin:0;">
+	<div class="panel-heading" style="position:relative">
+		<h3 class="panel-title">{{Module.caption? Module.capiton: '新建模块'}}</h3>
+		<a href="javascript:;" 
+			style="position:absolute; right: 10px; top:10px;"
+			data-ng-click="Module.edit=false"><i class="fa fa-times"></i></a>
+	</div>
+
+	<div class="panel-body" style="overflow: auto;position: absolute;bottom: 0;top: 40px;left: 0; right: 0;">
+		
+<div data-ng-if="Module.saving" class="loading"><i class="fa fa-spin fa-spinner"></i> 正在保存...</div>
+  			
+
+<div class="panel panel-default" style="margin: 20px; width: 750px;">
+	<div class="panel-body">
+		<div class="form-group">
+			<label class="col-sm-1 control-label">主键</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control"  placeholder="主键，如nova.weather"
+					      	data-ng-model="Module.data.name"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label">名称</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control"  placeholder="名称，如天气情况"
+					      	data-ng-model="Module.data.caption"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label">路径</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control"  placeholder="路径，支持全路径和页面相对路径"
+					      	data-ng-model="Module.data.url"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label">图标</label>
+			<div class="col-sm-11">
+				<input type="text" class="form-control"  placeholder="图标，参考glyphicon和fontawsome"
+					      	data-ng-model="Module.data.icon"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label">组合模块</label>
+			<div class="col-sm-11">
+				<a href="javascript:;" class="choice"
+					data-ng-class="{true:'choice-on', false:'choice-off'}[Module.Combine.on]"
+					data-ng-click="Module.Combine.toggle()">
+					<i class="fa" data-ng-class="{true:'fa-toggle-on', false:'fa-toggle-off'}[Module.Combine.on]"></i></a></div>
+		</div>
+		<div data-ng-if="Module.Combine.on">
+			<div class="form-inline">
+		   		<div class="form-group">
+				    <input type="number" class="form-control" placeholder="行数" data-ng-model="Module.Combine.rows">&nbsp;&times;
+				    <input type="number" class="form-control" placeholder="列数" data-ng-model="Module.Combine.cols">
+				    <button class="btn btn-default" data-ng-click="Module.Combine.table()">确定</button>
+				</div>
+			</div>
+			<table class="table table-bordered">
+				<tbody>
+					<tr data-ng-repeat="row in Module.Combine.cells">
+						<td data-ng-repeat="cell in row">
+							<button class="btn btn-default" data-ng-click="Module.Combine.open(cell)">选择模块</button>
+							<span>{{cell.caption}}</span>
+						</td></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+  			
+</div>
+
+<div class="panel panel-default" style="margin: 20px; width: 750px;">
+  <div class="panel-body">
+  	<div class="form-inline" data-ng-repeat="(key,value) in Module.data.conf">
+   		<div class="form-group">
+		    <label style="width:150px;">{{key}}</label>
+		    <input type="text" class="form-control" data-ng-model="Module.data.conf[key]" style="min-width: 500px;">
+		    <a href="javascript:;" style="color: red;" data-ng-click="Module.removeExt(key)"><i class="fa fa-times"></i></a>
+		</div>
+	</div>
+	<button class="btn btn-default btn-tool" data-ng-click="Module.addExt()"><i class="fa fa-plus"></i> 添加</button>
+  </div>
+</div>
+<div style="clear:both;"></div>
+  		<button class="btn btn-success" data-ng-click="Module.save()"><i class="fa fa-save"></i> 保存</button>
+	</div>
+
+</div>
+
+<script type="text/ng-template" id="module_choose.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">模块选择</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<ul class="modules-list"><li 
+				data-ng-repeat="row in modules"
+				data-ng-class="{true:'active'}[selected==row]"><a href="javascript:;" data-ng-click="select(row)">{{row.caption}}</a></li>
+				<li style="clear: both;"></li>
+			</ul>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </script>
+<script type="text/ng-template" id="ext_item.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">新加扩展属性</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+<div class="form-group">
+				<input type="text" class="form-control"  placeholder="英文主键，如url"
+					      	data-ng-model="ret.key"></div>
+<div class="form-group">
+				<input type="text" class="form-control"  placeholder="值"
+					      	data-ng-model="ret.value"></div>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </script>

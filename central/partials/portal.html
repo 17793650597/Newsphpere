@@ -1,0 +1,20 @@
+<style type="text/css">
+#portal-container {width: 1280px; margin:10px auto;}
+#portal-container .tile-item { position:relative; border:1px dashed #ccc; margin: 10px 10px 0 0; float: left; padding: 5px;}
+#portal-container .tile-item>a {font-size: 2rem; color: #fff;}
+#portal-container .tile-item>a:hover {text-decoration: none;}
+#portal-container .tile-item i {font-size: 1.7rem; text-shadow: 0 0 0.03rem #000;}
+</style>
+<div style="position: absolute; top:0; bottom: 0; left: 0; right: 0;overflow: auto">
+	<div id="portal-container">
+		<div data-ng-repeat="cell in Cavas.cells">
+  			<div class="tile-item" style="height:{{cell.rowspan*150 + (cell.rowspan -1)*10}}px;
+  				width: {{cell.colspan * 310+ (cell.colspan -1)*10}}px;
+  				background: {{cell.color}};
+  				">
+  				<a href="{{cell.url}}" target="_blank"><i class="{{cell.icon}}"></i> {{cell.caption}}</a>
+			</div>
+  		</div>
+  		<div style="clear:both;"></div>
+	</div>
+</div>

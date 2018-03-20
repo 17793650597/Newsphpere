@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-title" content="协同平台">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="format-detection" content="email=no">
+		<title>融媒指挥中心管理配置</title>
+		<link rel="shortcut icon" href="./images/favicon.ico" />
+		<link rel="stylesheet" href="../3rd/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../3rd/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/default.css">
+		<style type="text/css">
+			body {
+				height: 100%;
+			}
+			
+			.manager-container {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-start;
+			}
+			
+			.left-pane {
+				background: #333645;
+				padding-right: 0;
+			}
+			
+			.left-pane .menu {
+				padding: 0;
+				color: #c7ced9;
+				overflow: auto;
+				display: block;
+			}
+			
+			.row.even {
+				background: #fafafa;
+			}
+			
+			.row > .form-group {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin: 0.1rem 0;
+				font-size: 0.18rem;
+				justify-content: flex-start;
+			}
+			
+			.row > .form-group > div,
+			.row > .form-group > label {
+				margin: 0 0.2rem
+			}
+			
+			.row > .form-group > .akey {
+				flex-grow: 1;
+			}
+			
+			.row > .form-group > .avalue {
+				flex-grow: 2;
+			}
+			
+			.header > button {
+				font-size: 0.15rem;
+			}
+			
+			.modal-content {
+				background: #fff;
+			}
+			
+		</style>
+		<script type="text/javascript" src="../3rd/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="../3rd/jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/util.js"></script>
+		<script type="text/javascript" src="../js/central.proxy.js"></script>
+		<script type="text/javascript" src="js/manager.js"></script>
+	</head>
+
+	<body>
+		<!-- <header id="nv_header">
+			<nav class="navbar navbar-inverse" role="navigation">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/central"><img alt="LOGO" src="/web/api/config/sys/logo" height="26"></a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav">
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header> -->
+		<div class="manager-container">
+			<nav id="nv_left">
+				<div class="menu_container">
+					<ul class="menu navi">
+					</ul>
+					<div class="hr_black"></div>
+					<ul class="menu opr">
+						<li><a href="javascript:;" id="BtnAddModule"><i class="fa fa-plus-circle" aria-hidden="true"></i><span class="left_menu_title">新增</span></a></li>
+						<li><a href="javascript:;" id="BtnDelModule"><i class="fa fa-minus-circle" aria-hidden="true"></i><span class="left_menu_title">删除</span></a></li>
+						<li class="hidden"><a href="javascript:;" id="BtnDelModuleOK"><i class="fa fa-check-circle" aria-hidden="true"></i><span class="left_menu_title">完成</span></a></li>
+					</ul>
+				</div>
+			</nav>
+			<div id="nv_content">
+				<div class="header">
+					<button id="BtnSave" class="btn btn-success"><i class="fa fa-floppy-o"></i> <span>保存</span></button>
+					<!--button id="BtnCreate" class="btn btn-default"><i class="fa fa-plus"></i> <span>新建</span></button>
+					<button id="BtnRefresh" class="btn btn-default"><i class="glyphicon glyphicon-refresh"></i> <span>刷新</span></button>
+					<button id="BtnDelete" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> <span>删除</span></button-->
+				</div>
+				<div class="config-field">
+				</div>
+			</div>
+		</div>
+		<!-- <footer id="nv_footer">
+			Copyright © 2015-2016. China Digital Video (Beijing) Limited.
+		</footer> -->
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+						<h4 class="modal-title" id="myModalLabel">新增页面</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="text" class="form-control" id="moduleCaption" placeholder="页面名称(必填项),如 天气情况"></div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="moduleName" placeholder="页面代码(必填项),如 nova.weather"></div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="modulePath" placeholder="访问路径(必填项),如 views/special/photos/"></div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="moduleColor" placeholder="图块颜色,如 colorI"></div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="moduleIcon" placeholder="页面图标,如 fa fa-photo"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="btn_submit">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(function() {
+				Utils.setPageFontSize(1920);
+				ModuleConfig.loadModuleConfigs();
+				$('#BtnAddModule').click(function() {
+					ModuleConfig.addNewModule();
+				});
+				$('#BtnDelModule').click(function() {
+					ModuleConfig.delModule();
+				});
+				$('#BtnSave').click(function() {
+					ModuleConfig.saveModuleConfigs();
+				});
+				$('#BtnCreate').click(function() {
+					ModuleConfig.createModuleConfigClick();
+				});
+				$('#BtnRefresh').click(function() {
+					ModuleConfig.loadModuleConfigs(true);
+				});
+				$('#BtnDelete').click(function() {
+					ModuleConfig.deleteModuleConfigs();
+				});
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-title" content="协同平台">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<title>融媒体指挥中心</title>
+<link rel="shortcut icon" href="./images/favicon.ico" />
+<link rel="stylesheet" href="3rd/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="3rd/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/default.css">
+<style type="text/css">
+@-webkit-keyframes flyin {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate(5rem, 5rem) rotate(90deg) scale(0.3);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+@-moz-keyframes flyin {
+    0% {
+        opacity: 0;
+        -moz-transform: translate(5rem, 5rem) rotate(90deg) scale(0.3);;
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+@-ms-keyframes flyin {
+    0% {
+        opacity: 0;
+        -ms-transform: translate(5rem, 5rem) rotate(90deg) scale(0.3);;
+    }
+    100% {
+        opacity: 1;
+        -ms-transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes flyin {
+    0% {
+        opacity: 0;
+        transform: translate(5rem, 5rem) rotate(90deg) scale(0.3);;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    overflow-y: auto;
+    overflow-x: hidden;
+/*     background-size: cover; */
+}
+#canvas {
+	position: absolute;
+	top:0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: -1;
+}
+.status-bar {
+    position: fixed;
+    top: calc(50% - 0.32rem);
+    right: 0;
+    bottom: auto;
+    left: 0;
+    height: 0.32rem;
+    line-height: 0.32rem;
+
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-size: 0.24rem;
+}
+
+/* .status-bar>.text {
+	padding-left: 40px;
+	background: transparent url(./base/images/loading.gif) no-repeat left center;
+} */
+#nv_header {
+    background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%) !important;
+    height: 0.5rem;
+}
+
+#nv_header > nav.navbar {
+    border-radius: 0;
+    height: 0.5rem;
+    border: 0;
+    background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%) !important;
+}
+
+#nv_header .navbar-inverse {
+    background: rgba(0, 0, 0, .2);
+}
+
+#nv_header > nav .navbar-collapse > ul {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#nv_header .navbar .navbar-nav > li > a {
+    padding: 0.12rem 0.15rem;
+    color: rgb(157, 157, 157)
+}
+
+#nv_header .navbar .navbar-nav li a i {
+    font-size: 0.2rem;
+}
+
+#nv_header .navbar .navbar-nav .dropdown-menu li a i {
+    font-size: 0.16rem;
+    margin-right: 0.1rem;
+}
+
+#nv_header .top-suggestion {
+    position: fixed;
+    top: 0;
+    left: 2rem;
+    right: 2rem;
+
+    line-height: 0.5rem;
+    display: block;
+    color: #FC6565;
+    font-size: 0.32rem;
+}
+
+.nv-tiles {
+    padding: 1rem;
+}
+
+.nv-tile {
+    display: block;
+    min-width: 2.4rem;
+    width: calc((100% - 0.4rem) / 4);
+    height: 1.7rem;
+    float: left;
+    margin: 5px;
+    border-color: transparent;
+    border-width: 0.03rem;
+    border-style: solid;
+}
+
+.nv-tile.flyin {
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation-duration: .4s;
+    -moz-animation-duration: .4s;
+    -ms-animation-duration: .4s;
+    animation-duration: .4s;
+    -webkit-animation-timing-function: ease-out;
+    -moz-animation-timing-function: ease-out;
+    -ms-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    -webkit-animation-name: flyin;
+    -moz-animation-name: flyin;
+    -ms-animation-name: flyin;
+    animation-name: flyin;
+}
+
+.nv-tile:hover {
+    color: #fff;
+    outline: thin dotted;
+    outline: 0.05rem auto -webkit-focus-ring-color;
+    outline-offset: -0.02rem;
+    text-decoration: none;
+}
+
+.nv-tile > .nv-tile-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0.15rem;
+    color: #fff;
+    background: rgba(255, 255, 255, .2);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nv-tile > .nv-tile-inner > i {
+    font-size: 0.7rem;
+    text-shadow: 0 0 0.03rem #000;
+}
+
+.nv-tile:hover > .nv-tile-inner > i, 
+.nv-tile:hover > .nv-tile-inner > span,
+.nv-tile:focus > .nv-tile-inner > i, 
+.nv-tile:focus > .nv-tile-inner > span {
+	transition: all 500ms ease-in-out;
+    transform: translateY(-0.2rem);
+}
+
+.nv-tile:hover, .nv-tile:focus {
+    text-decoration: none;
+}
+
+.nv-tile > .nv-tile-inner > span {
+	position: relative;
+    font-size: 0.28rem;
+    padding: 0.1rem;
+}
+
+.nv-tile:hover > .nv-tile-inner > span {
+    text-decoration: none;
+}
+
+.nv-tile.colorZ > .nv-tile-inner {
+    background: #d72d23;
+}
+
+.nv-tile.colorA > .nv-tile-inner {
+    background: #E2A11B;
+    /* background: rgba(226, 161, 27, .4); */
+}
+
+.nv-tile.colorB > .nv-tile-inner {
+    background: #0050A0;
+    /* background: rgba(0, 80, 160, .4); */
+}
+
+.nv-tile.colorC > .nv-tile-inner {
+    background: #339933;
+    /* background: rgba(51, 153, 51, .4); */
+}
+
+.nv-tile.colorD > .nv-tile-inner {
+    background: #39C1A2;
+    /* background: rgba(57, 193, 162, .4); */
+}
+
+.nv-tile.colorE > .nv-tile-inner {
+    background: #7300D8;
+    background: rgba(115, 0, 216, .4);
+}
+
+.nv-tile.colorF > .nv-tile-inner {
+    background: #0996F0;
+    /* background: rgba(9, 150, 240, .4); */
+}
+
+.nv-tile.colorG > .nv-tile-inner {
+    background: #B871E6;
+    /* background: rgba(184, 113, 230, .4); */
+}
+
+.nv-tile.colorH > .nv-tile-inner {
+    background: #FF00A2;
+    background: rgba(255, 0, 162, .4);
+}
+
+.nv-tile.colorI > .nv-tile-inner {
+    background: #0014E5;
+    background: rgba(0, 20, 229, .4);
+}
+
+.nv-tile.colorJ > .nv-tile-inner {
+    background: #A9AB00;
+    /* background: rgba(169, 171, 0, .4); */
+}
+
+.nv-tile.colorK > .nv-tile-inner {
+    background: #BDB76B;
+    /* background: rgba(189,183,107, .4); */
+}
+
+.nv-tile.colorL > .nv-tile-inner {
+    background: #ADAFC8;
+    /* background: rgba(189,183,107, .4); */
+}
+
+.face-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 0px);
+    height: calc(100% - 0px);
+
+    -webkit-perspective: 600;
+}
+
+.face-wrapper.expand {
+    -webkit-transition: top 0.2s linear 0.8s,
+    left 0.2s linear 0.8s,
+    width 0.2s linear 0.8s,
+    height 0.2s linear 0.8s;
+}
+
+.face-wrapper.collapsed {
+    -webkit-transition: top 0.4s linear,
+    left 0.4s linear,
+    width 0.4s linear,
+    height 0.4s linear;
+}
+
+.face-wrapper > .faces {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-transition-delay: 0;
+}
+
+@-webkit-keyframes front-y-spin {
+    0% {
+        -webkit-transform: translate(0, 0) rotateY(180deg);
+    }
+    40% {
+        -webkit-transform: translate(0, 0) rotateY(90deg);
+    }
+    80% {
+        -webkit-transform: translate(0, 0) rotateY(0deg);
+    }
+    100% {
+        -webkit-transform: translate(0, 0) rotateY(0deg);
+    }
+}
+
+@-webkit-keyframes back-y-spin {
+    0% {
+        -webkit-transform: translate(0, 0) rotateY(0deg);
+    }
+    40% {
+        -webkit-transform: translate(0, 0) rotateY(0deg);
+    }
+    70% {
+        -webkit-transform: translate(0, 0) rotateY(90deg);
+    }
+    100% {
+        -webkit-transform: translate(0, 0) rotateY(180deg);
+    }
+}
+
+.face-wrapper > .faces.showfront {
+    -webkit-transform: rotateY(0);
+    -webkit-animation-name: front-y-spin;
+}
+
+.face-wrapper > .faces.showback {
+    -webkit-transform: rotateY(180deg);
+    -webkit-animation-name: back-y-spin;
+}
+
+.face-wrapper > .faces > .face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+}
+
+.face-wrapper > .faces > .frontface {
+    -webkit-transform: rotateY(-180deg);
+}
+
+.face-wrapper > .faces > .backface {
+    background: rgba(255, 255, 255, .5);
+    -webkit-transform: rotateY(0deg);
+    -webkit-transform-origin: left top;
+}
+
+.face-wrapper > .faces > .backface.expand {
+    -webkit-transform: rotateY(0deg) scale(1);
+    -webkit-transition: all 0.2s linear 0.8s;
+}
+
+.face-wrapper > .faces > .backface.collapsed {
+    -webkit-transition: all 0.4s linear;
+}
+
+.face-wrapper > .faces > .backface > .close {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 0.5rem;
+    padding: 0 4em;
+    font-size: 1.5em;
+    background: #fff;
+    opacity: 0;
+}
+
+.face-wrapper > .faces > .backface > iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline-style: none;
+}
+
+.status-bar .auth {
+    word-wrap: break-word;
+    font-size: 0.14rem;
+    margin: 0.1rem 0.4rem;
+    text-align: left;
+    line-height: 0.24rem;
+}
+
+::-webkit-scrollbar {
+    width: 0.12rem;
+    height: 0.06rem;
+    background: rgba(126, 86, 84, 0.3);
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+    width: 0.12rem;
+    height: 0.06rem;
+    background: rgba(126, 86, 84, 0.3);
+    -webkit-border-radius: 0.02rem;
+    -moz-border-radius: 0.02rem;
+    border-radius: 0.02rem;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 0.12rem;
+    height: 0.06rem;
+    background: #702121;
+    -webkit-border-radius: 0.02rem;
+    -moz-border-radius: 0.02rem;
+    border-radius: 0.02rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #A90000;
+    box-shadow: inset 0 0 0.02rem #000;
+}
+
+::-webkit-scrollbar-track-piece {
+    width: 0.12rem;
+    background: rgba(126, 86, 84, 0.3);
+    border-radius: 0;
+}
+
+.header-bar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0.05rem;
+}
+
+.header-bar > div {
+	font-size: 0.2rem;
+    z-index: 1000;
+    padding: 0 0.1rem;
+    position: relative;
+}
+
+.header-bar > div > a:hover {
+	color: #D9E1E8;
+    text-decoration: blink;
+}
+.modal-dialog {
+	background: #fff;
+}
+
+</style>
+    <script type="text/javascript" src="3rd/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="3rd/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="3rd/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/central.proxy.js"></script>
+<script type="text/javascript">
+	$(function(){
+		Utils.setBgCSS();
+		Utils.setPageFontSize(1920);
+		var pageSession = null;
+		
+		//临时解决首次打开页面需要二次刷新的问题
+		
+		getCurrentSession();
+		
+		var i=0;
+		
+		function getCurrentSession(){
+			try{
+				CentralProxy.getCurrentSession(function(session){
+					pageSession = session;
+					localStorage.setItem('nova.central.session', JSON.stringify(session));
+					$('#user').html(session.userName);
+					$('#user').parent().click(function(){
+						$('#myModal').modal();
+					});
+					issureRedirect();
+				});
+			}catch(e){
+				i++;
+				if(i>3){
+					location.reload();
+				} else {
+					setTimeout(getCurrentSession, 1000);
+				}
+			}
+		}
+		
+		// 根据是否有来源页面和权限，进行页面跳转
+		function issureRedirect() {
+			var session = pageSession;
+			CentralProxy.getUser(session.userId, function(resp){
+				if(session.roles){
+					for(var roleId in session.roles){  
+						var permissions = session.roles[roleId].permissions;
+						var names = [];
+						$(permissions).each(function(index, name){
+							if(names.indexOf(name)<0){
+								names.push(name);
+							}
+						});
+						var param = { "group":{
+							"allOf":[{"caption":{"IN": names}}]}};
+						CentralProxy.getModulesInf(param, function(res){
+							ModuleConfigHelper.setConfig(res.items);
+						});
+		            }
+				}
+				if(resp.other.portal){
+					showDashboard(resp.other.portal);
+				} else {
+					$('.status-bar>.text').html('没有查询到您的个人主页配置，请先<a href="manager">设置</a>。');
+				}
+			}, function(error){
+				console.log(error);
+			});
+				
+		}
+		
+		// 显示有权访问的磁贴
+		function showDashboard(tiles) {
+			// 是否显示动画效果
+			// TODO sunwei 暂时hack，将来要从用户配置中获取
+			var reg = new RegExp("(^|&)animate=([^&]*)(&|$)");
+			var animate = location.search.substr(1).match(reg);
+			$('div.nv-tiles').remove();
+			var div = $('<div class=nv-tiles>').appendTo('body');
+			__appendNextTile(div, [].concat(tiles));
+			
+			$('<div style="clear:both;">').appendTo(div);
+		
+			function __appendNextTile(hTiles, tiles) {
+				if(tiles.length <= 0) {
+					// to the end ...
+					if(animate) {
+						hTiles.find('.nv-tile').each(function(index, link){
+							addAnimationEffect($(this));
+						});
+					}
+					return;
+				}
+				
+				var tile = tiles.shift();
+				var width = tile.colspan? tile.colspan:1;
+				var height = tile.rowspan? tile.rowspan:1;
+				var total_w = $('.nv-tiles').width();
+				var cell_w = (total_w - 50) / 4;
+				
+				var hTile = $('<a href="javascript:;" class="nv-tile"><div class=nv-tile-inner></div></div>')
+					.css("background-color", tile.color)
+					.attr('href', tile.url)
+					.data('tile', tile)
+					.width(cell_w * width + (width-1) * 10 )
+					.height(130 * height + (height-1) * 10)
+					.appendTo(hTiles);
+				hTile.find('.nv-tile-inner').append(
+					$('<i>').addClass(tile.icon),
+			        $('<span>').text(tile.caption));
+				if(animate) {
+					hTile.addClass('flyin');
+					setTimeout(function(){
+						__appendNextTile(hTiles, tiles);
+					}, 50);
+				} else {
+					hTile.attr('target', tile.target ? tile.target: '_blank');
+					__appendNextTile(hTiles, tiles);
+				}
+			}
+			
+			var canvas = document.getElementById('canvas');
+			if(!canvas){
+				return;
+			}
+			
+			var temp_h = $('body').height() > window.innerHeight ? $('body').height() : window.innerHeight;
+			var	ctx = canvas.getContext('2d'), 
+				w = canvas.width = document.body.clientWidth, 
+				h = canvas.height = temp_h, 
+				hue = 217, 
+				count = 0, 
+				maxStars = 1200;
+			var stars = [];
+			
+			var canvas2 = document.createElement('canvas'), ctx2 = canvas2.getContext('2d');
+			canvas2.width = 100;
+			canvas2.height = 100;
+			var half = canvas2.width / 2, gradient2 = ctx2.createRadialGradient(half, half,
+					0, half, half, half);
+			gradient2.addColorStop(0.025, '#fff');
+			gradient2.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+			gradient2.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+			gradient2.addColorStop(1, 'transparent');
+			
+			ctx2.fillStyle = gradient2;
+			ctx2.beginPath();
+			ctx2.arc(half, half, half, 0, Math.PI * 2);
+			ctx2.fill();
+			
+			// End cache
+			
+			function random(min, max) {
+				if (arguments.length < 2) {
+					max = min;
+					min = 0;
+				}
+			
+				if (min > max) {
+					var hold = max;
+					max = min;
+					min = hold;
+				}
+			
+				return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+			
+			function maxOrbit(x, y) {
+				var max = Math.max(x, y), diameter = Math.round(Math.sqrt(max * max + max
+						* max));
+				return diameter / 2;
+			}
+			
+			var Star = function() {
+			
+				this.orbitRadius = random(maxOrbit(w, h));
+				this.radius = random(60, this.orbitRadius) / 12;
+				this.orbitX = w / 2;
+				this.orbitY = h / 2;
+				this.timePassed = random(0, maxStars);
+				this.speed = random(this.orbitRadius) / 900000;
+				this.alpha = random(2, 10) / 10;
+			
+				count++;
+				stars[count] = this;
+			};
+			
+			Star.prototype.draw = function() {
+				var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX, y = Math
+						.cos(this.timePassed)
+						* this.orbitRadius + this.orbitY, twinkle = random(10);
+			
+				if (twinkle === 1 && this.alpha > 0) {
+					this.alpha -= 0.05;
+				} else if (twinkle === 2 && this.alpha < 1) {
+					this.alpha += 0.05;
+				}
+			
+				ctx.globalAlpha = this.alpha;
+				ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2,
+						this.radius, this.radius);
+				this.timePassed += this.speed;
+			};
+			
+			for (var i = 0; i < maxStars; i++) {
+				new Star();
+			}
+			
+			function animation() {
+				ctx.globalCompositeOperation = 'source-over';
+				ctx.globalAlpha = 0.8;
+				ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+				ctx.fillRect(0, 0, w, h);
+			
+				ctx.globalCompositeOperation = 'lighter';
+				for (var i = 1, l = stars.length; i < l; i++) {
+					stars[i].draw();
+				}
+			
+				window.requestAnimationFrame(animation);
+			}
+			
+			animation();
+		}
+		
+		function addAnimationEffect(sub) {
+			sub.attr('href', 'javascript:;').click(function(){
+				var tile = sub.data('tile');
+				var l = sub.offset().left - sub.scrollLeft() + 3;
+				var t = sub.offset().top - sub.scrollTop() + 3;
+				
+				var wrapper = $('<div class="face-wrapper"><div class="faces showfront"><div class="face frontface"></div><div class="face backface"></div></div></div>')
+					.width(sub.width())
+					.height(sub.height())
+					.css({
+						left: l + 'px',
+						top: t + 'px'
+					})
+					.addClass('expand')
+					.appendTo('body');
+				
+				var frontface = wrapper.find('.frontface');
+				var backface = wrapper.find('.backface');
+				
+				frontface.append(sub.clone().removeClass('flyin').width(sub.width()).height(sub.height()));
+				backface
+					.attr('style',
+						'-webkit-transform: rotateY(0deg) scale3d(' + (sub.width() / $(window).width()) + ',' + (sub.height() / $(window).height()) + ',1);'
+					)
+					.width($(window).width())
+					.height($(window).height())
+					.append(
+							$('<a href="javascript:;" class="close">×</a>').click(function(){
+								backface.toggleClass('expand collapsed').attr('style', backface.attr('oldStyle')).removeAttr('oldStyle');
+					        	wrapper.toggleClass('expand collapsed').attr('style', wrapper.attr('oldStyle')).removeAttr('oldStyle').find('.faces').toggleClass('showback showfront');
+					        	setTimeout(function(){
+									wrapper.remove();
+									sub.css('visibility', 'initial');
+					        	}, 1000);
+					        }),
+						    $('<iframe>').attr('src', tile.url));
+
+				sub.css('visibility', 'hidden');
+				
+				setTimeout(function(){
+					wrapper.attr('oldStyle', wrapper.attr('style')).removeAttr('style');
+					backface.addClass('expand').attr('oldStyle', backface.attr('style')).removeAttr('style');
+				}, 1);
+			});
+		}
+		
+		$('#btn_changePwd').click(function(){
+			var pwd1 = $('#pwd1').val();
+			var pwd2 = $('#pwd2').val();
+			var pwd3 = $('#pwd3').val();
+			if(pwd2 != pwd3){
+				alert("两次密码输入不一致。");
+				return;
+			}
+			$.ajax({
+				url		: './api/lo/users/change/password',
+				type	: 'POST',
+				async	: true,
+				dataType: 'json',
+				data	: {oldPwd: pwd1, newPwd: pwd2},
+				success	: function(session){
+					alert("密码修改成功。");
+					$('#myModal').modal('hide');
+				},
+				error : function(jqXHR, textStatus, errorThrown){
+					var msg = '';
+					if(jqXHR.status === 403) {
+						var msg = '登录失败:' + jqXHR.responseText;
+					} else {
+						var msg = '登录失败，详情:' + JSON.parse(jqXHR.responseText).message;
+					}
+					alert("密码修失败。" + msg);
+				},
+				statusCode : {},
+				beforeSend: function() {
+				}
+			});
+		});
+		
+		//刷新页面配置信息按钮
+		var refreshBtnHtml = '<div class="reload"><a href="javascript:;"><i class="fa fa-refresh" aria-hidden="true"></i> <span id="refresh" title="后台更改页面配置后，重新载入页面配置">刷新</span></a></div>';
+		$(refreshBtnHtml).prependTo($('.header-bar')).click(function(){
+			var session = pageSession;
+			
+			CentralProxy.getUser(session.userId, function(resp){
+				if(session.roles){
+					for(var roleId in session.roles){  
+						var permissions = session.roles[roleId].permissions;
+						var names = [];
+						$(permissions).each(function(index, name){
+							if(names.indexOf(name)<0){
+								names.push(name);
+							}
+						});
+						var param = { "group":{
+							"allOf":[{"caption":{"IN": names}}]}};
+						CentralProxy.getModulesInf(param, function(res){
+							ModuleConfigHelper.setConfig(res.items);
+						});
+		            }
+				}
+			});
+		});
+		
+	});
+</script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+	<!-- 通常情况下只有已经登录的才能到此，否则会被shiro拦截并重定向到登录页 -->
+	<!-- 但有时候浏览器会缓存 -->
+	<div class="status-bar">
+		<span class="text"></span>
+	</div>
+	<div class="header-bar">
+		<div class="manager"><a href="manager" target="_black"><i class="fa fa-cog" aria-hidden="true"></i> <span>设置</span></a></div>
+		<div class="user"><a href="javascript:;"><i class="fa fa-user"></i> <span id="user"></span></a></div>
+		<div class="quit"><a href="./api/logoff"><i class="fa fa-sign-out"></i><span>退出</span></a></div>
+	</div>
+	<div class="detail-div detail-globe"></div>
+	
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="password" class="form-control" id="pwd1" placeholder="原密码"></div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="pwd2" placeholder="新密码"></div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="pwd3" placeholder="再次输入"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="btn_changePwd">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

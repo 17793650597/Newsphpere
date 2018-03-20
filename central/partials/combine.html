@@ -1,0 +1,16 @@
+<div data-ng-repeat="row in Module.combine" data-ng-init="rowIndex = $index" 
+	style="position: absolute;
+		top:{{rowIndex>0?100/Module.combine.length * rowIndex:0}}%;
+		height:{{100/Module.combine.length}}%;
+		left: 0;
+		width:100%;">
+	<div data-ng-repeat="cell in row" class="block-cell"
+		style="position: absolute;
+			left:{{$index > 0 ? $index*100/row.length : 0}}%;
+			width:{{100/row.length}}%;
+			top:0;
+			height: 100%;">
+		<iframe data-ng-src="{{change(cell, rowIndex, $index)}}" 
+			allowtransparency="true" width="100%" height="100%" style="border: none"></iframe>
+	</div>
+</div>

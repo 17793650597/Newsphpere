@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>融媒体指挥中心 - 微信排行</title>
+	<link rel="shortcut icon" href="../../../images/favicon.ico" />
+	<link rel="stylesheet" href="../../../3rd/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../../3rd/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../3rd/pagetransitions/css/component.css" />
+	<link rel="stylesheet" type="text/css" href="../../../3rd/pagetransitions/css/animations.css" />
+	<link rel="stylesheet" href="../../../css/default.css" />
+    <link rel="stylesheet" href="./css/index.css"/>
+	<script type="text/javascript" src="../../../3rd/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../../../3rd/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../3rd/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../../3rd/pagetransitions/js/modernizr.custom.js"></script>
+	<script type="text/javascript" src="../../../js/page.transitions.js"></script>
+    <script type="text/javascript" src="../../../js/central.proxy.js"></script>
+    <script type="text/javascript" src="../../../js/nova.utils.js"></script>
+	<script type="text/javascript" src="../../../js/util.js"></script>
+	<script type="text/javascript" src="./js/index.js"></script>
+
+    <style>
+    </style>
+</head>
+
+<body class="wechat-billboard-page">
+	<!-- <div class="area">
+		<img class="logo" alt="LOGO" src="../../../images/wechat-billboard-logo.png"></img>
+		<h2 class="area-title">本台微信发布排行榜</h2>
+		<img class="adding-logo" alt="top10" src="../../../images/top10.png"></img>
+	</div> -->
+	<div class="area">
+	        <div class="logo fa fa-wechat"></div>
+	        <h2 class="area-title">微信排行榜</h2>
+ 	        <img class="adding-logo" alt="top10" src="../../../images/top10.png"></img>
+	    </div>
+    <div class="gallery-wechat-billboard pt-perspective" id="pt-main">
+        <div class="header">
+        	<div class="up">
+	        	<div class="time">2016年4月</div>
+	            <div class="btns">
+		            <a class="active">24小时</a>
+		            <a>7天</a>
+		            <a>30天</a>
+	            </div>
+        	</div>
+			<div class="down">
+        		<span class="col-xs-2">排名</span>
+        		<div class="data col-xs-10">
+<!-- 	        		<span class="col-xs-6">渠道名称</span>
+	        		<span class="col-xs-2">阅读数</span>
+	           		<span class="col-xs-2">点赞数</span>
+	           		<span class="col-xs-2">评论数</span> -->
+	           		<span class="col-xs-4">名称</span>
+	           		<span class="col-xs-2">点赞数</span>
+	           		<span class="col-xs-2">评论数</span>
+	           		<span class="col-xs-2">阅读数</span>
+	           		<span class="col-xs-2">趋势</span>
+        		</div>
+        	</div>
+        </div>
+        <!-- <div class="wechat-billboard-list">
+        	<div class="item">
+        		<div class="ranking col-xs-2">
+        			<div class="ranking-card">&nbsp;</div>
+        			<div class="ranking-no">No.1</div>
+        		</div>
+        		<div class="data col-xs-10">
+        			<div class="name col-xs-4">#科学抗癌#</div>
+	           		<div class="activity-count col-xs-2">45.22</div>
+	           		<div class="spread-count col-xs-2">52.32</div>
+	           		<div class="watcher-count col-xs-2">3219293</div>
+	           		<div class="raising col-xs-2 glyphicon glyphicon-arrow-up"></div>
+        		</div>
+        	</div>
+        </div> -->
+    <div class="loading" style="display: none;"><i class="fa fa-spin fa-spinner"></i> 正在获取数据...</div>    
+    </div>
+</body>
+
+</html>

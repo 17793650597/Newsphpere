@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>收视收听率</title>
+	<link rel="shortcut icon" href="../../../images/favicon.ico" />
+	<link rel="stylesheet" href="../../../3rd/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../../3rd/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../../../3rd/pagetransitions/css/component.css" />
+	<link rel="stylesheet" type="text/css" href="../../../3rd/pagetransitions/css/animations.css" />
+	<style type="text/css">
+		iframe {
+			width: 100%;
+		    height: 100%;
+		    border: none;
+		    background: transparent;
+		    overflow: auto;
+		}
+		
+		#pt-main > .pt-page {
+			background: transparent;
+		}
+		
+		body{
+    		overflow-x: hidden;
+		}
+	</style>
+    
+	<script type="text/javascript" src="../../../3rd/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../../../3rd/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="../../../3rd/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../../3rd/pagetransitions/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="../../../js/central.proxy.js"></script>
+    <script type="text/javascript" src="../../../js/nova.utils.js"></script>
+	<script type="text/javascript" src="../../../js/util.js"></script>
+	<script type="text/javascript" src="../../../js/page.transitions.js"></script>
+	<script type="text/javascript" src="../../../js/echarts.show.js"></script>
+
+</head>
+
+<body class="special-page">
+	<div id="pt-main" class="pt-perspective">
+		<div class="pt-page"><iframe name="variety" src="variety/?bg=transparent"></iframe></div>
+		<div class="pt-page"><iframe name="exponent" src="exponent/?bg=transparent"></iframe></div>
+		<div class="pt-page"><iframe name="television"  id="tele"></iframe></div>
+		<div class="pt-page"><iframe name="weekly" src="weekly/?bg=transparent"></iframe></div>
+<!-- 		<div class="pt-page"><iframe name="latest" src="television/?bg=transparent"></iframe></div> -->
+	</div>
+	
+	<script type="text/javascript" src="rating.js"></script>
+	<script type="text/javascript">
+/* 		延时加载television中echarts */
+/* 		window.onload=function(){
+			var timeDelay =setTimeout(function(){
+				if($(".pt-page-current iframe").attr("id") == 'tele'){
+		 			top.frames[2].postMessage("1","*");
+				}
+			},60000)
+		} */
+	</script>
+</body>
+
+</html>

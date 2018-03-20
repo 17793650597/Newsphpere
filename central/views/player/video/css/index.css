@@ -1,0 +1,256 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    /* 		    height: 100%; */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", Tahoma, Arial, STHeiti, sans-serif;
+    background: #333645 url("../../images/bg1920x1080.png") no-repeat fixed center;
+    background-size: cover;
+}
+
+.player-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.player-pane .video-billboard{
+	top: 14%;
+    left: 10%;
+    right: 10%;
+    bottom: 8%;
+    position: absolute;
+}
+.video-billboard .video-container {
+    position: absolute;
+    top: 0;
+    right: 32%;
+    bottom: 36%;
+    left: 0;
+    text-align: center;
+    border: 5px solid #006677;
+}
+.video-billboard .video-list-horizontal{
+	position: absolute;
+    left: 0;
+    right: 32%;
+    bottom: 0;
+    top: 64%;
+    overflow: hidden;
+}
+.video-billboard .video-list-vertical{
+	position: absolute;
+    left: 68.5%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+/*播放器样式*/
+.video-container .player {
+    width: 100%;
+	height: 91%;
+    background: #020403;;
+}
+.video-container .player-shadow {
+	width: 100%;
+    background: transparent;
+    bottom: 0.05rem;
+    height: 0.32rem;
+    left: 0;
+    position: absolute;
+}
+.video-container .player-shadow .name {
+    color: #fff;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0.2rem;
+    text-align: center;
+}
+.vodTransparent div.sewise-player-ui div.logo {
+    display: none !important;
+}
+/*水平列表样式*/
+.video-list-horizontal .video-list{
+	width: 100%;
+	height: 96%;
+	padding: 0.1rem 0;
+}
+.video-list-horizontal .video-list .item {
+    width: 24.5%;
+    height: 100%;
+    margin: 0 0.05rem 0 0;
+    float: left;
+    text-align: center;
+    background: #162a5f;;
+    display: block;
+    position: relative;
+}
+.video-list-horizontal .item a {
+    color: #fff;
+    font-size: 0.18rem;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    padding: 0 0.05rem;
+    text-decoration: none;
+}
+.video-list-horizontal .item a > i{
+	position: absolute;
+    top: 18%;
+    font-size: 0.6rem;
+    left: 40%;
+    opacity: 0.6;
+}
+.video-list-horizontal .item img {
+    display: block;
+    margin: 0 auto;
+    height: 58%;
+    max-width: 100%;
+}
+
+.video-list-horizontal .item span.video-title {
+    left: 0;
+    right: 20%;
+}
+.video-list-horizontal .item p {
+    height: 25%;
+    width: 100%;
+    margin: 0;
+    padding: 0.12rem 0.08rem 0;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-align: left;
+    -webkit-box-orient: vertical;
+}
+.video-list-horizontal .item .desc{
+    height: 15%;
+    padding: 0 0.08rem;
+    display: flex;
+    font-size: 0.15rem;
+    align-items: center;
+    justify-content: space-between;
+}
+/*右侧竖直方向列表*/
+
+.video-list-vertical h1.title {
+    color: #fff;
+    font-size: 0.2rem;
+    padding-left: 0.2rem;
+    text-align: left;
+    height: 4%;
+    margin: 0;
+}
+.video-list-vertical .video-list{
+	width: 100%;
+	height: 100%;
+}
+.video-list-vertical .item {
+    height: 15%;
+    display: flex;
+    margin: 0 0 0.05rem 0;
+    padding: 0.05rem;
+    background-color: #162a5f;
+}
+.video-list-vertical .item .img-container {
+    height: 100%;
+    max-height: 100%;
+    max-width: 32%;
+    width: 30%;
+}
+.video-list-vertical .item .img-container a {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.video-list-vertical .item .img-container img {
+    height: 100%;
+    width: 100%;
+}
+.video-list-vertical .item .img-container a > i{
+	position: absolute;
+    font-size: 0.5rem;
+    color: #fff;
+    opacity: 0.6;
+}
+.video-list-vertical .item .list-right{
+	height: 97%;
+    width: 72%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 0 0 0.04rem;
+}
+.video-list-vertical .item .video-title{
+	width: 100%;
+    font-size: 0.2rem;
+    margin: 0;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    padding: 0.01rem 0.08rem 0;
+}
+.video-list-vertical .item .desc{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    font-size: 0.15rem;
+    padding: 0 0.08rem;
+}
+
+
+
+@-webkit-keyframes bodong {
+    0% {
+        height: 5%;
+        background: #FFF;
+    }
+    30% {
+        height: 10%;
+        background: #fff;
+    }
+    60% {
+        height: 15%;
+        background: #fff;
+    }
+    80% {
+        height: 20%;
+        background: #fff;
+    }
+    100% {
+        height: 25%;
+        background: #fff;
+    }
+}
+
+@-webkit-keyframes yinxian {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

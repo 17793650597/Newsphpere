@@ -1,0 +1,12 @@
+<h2>用户管理</h2>
+<table class="table table-striped">
+	<tr data-ng-repeat="row in Users.data">
+		<td>{{row.id}}</td>
+		<td>{{row.name}}</td>
+		<td>{{row.email}}</td>
+		<td>{{row.roleIds[0]}}</td>
+		<td data-ng-if="row.status == 'Enable'"><span class="label label-success">Enable</span></td>
+		<td data-ng-if="row.status != 'Enable'"><span class="label label-danger">Disable</span></td>
+		<td>{{row.phone}}</td>
+	</tr>
+</table>

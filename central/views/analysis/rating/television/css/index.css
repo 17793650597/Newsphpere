@@ -1,0 +1,187 @@
+@-webkit-keyframes twinkling {
+    0% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes edgelight {
+    0% {
+        -webkit-box-shadow: 0px 0px 0px #dc7800;
+        opacity: 0.4;
+    }
+    25% {
+        -webkit-box-shadow: 0px 0px 0.4rem #dc7800;
+        opacity: 1;
+    }
+    50% {
+        -webkit-box-shadow: 0px 0px 0px #dc7800;
+        opacity: 0.4;
+    }
+    75% {
+        -webkit-box-shadow: 0px 0px 0.4rem #dc7800;
+        opacity: 1;
+    }
+    100% {
+        -webkit-box-shadow: 0px 0px 0px #dc7800;
+        opacity: 0.4;
+    }
+}
+
+@keyframes slide-up-keyframes {
+    0% {
+        transform: translateY(0.5rem);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes width-grow-keyframes {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes height-grow-keyframes {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #ffe9ea;
+    font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", Tahoma, Arial, STHeiti, sans-serif;
+}
+
+@keyframes slideright-keyframes {
+    0% {
+        transform: translate(-1rem, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+/* 
+.analysis-rating-page .area {
+    position: absolute;
+    top: 4%;
+    height: 10%;
+    left: 5%;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    animation: slideright-keyframes 1000ms ease-in-out 0ms 1 normal;
+    animation-fill-mode: backwards;
+}
+
+.analysis-rating-page .area > .logo {
+    font-size: 0.5rem;
+    width: 0.5rem;
+    display: block;
+    position: relative;
+}
+
+.analysis-rating-page .area > h2.area-title {
+    font-size: 0.36rem;
+    border-bottom: solid 0.04rem #f64b4b;
+    position: relative;
+    color: #ffe9ea;
+    text-shadow: 1px 1px 0.04rem rgba(255, 0, 0, 0.40);
+    margin: 0 0.2rem;
+}
+
+.blue .area > .logo {
+	color: #00fffb;
+}
+
+.blue .area > h2.area-title {
+	border-bottom: solid 0.04rem #00fffb;
+    text-shadow: 1px 1px 0.04rem rgba(0, 233, 255, 0.40);
+}
+.litchiblue .area > .logo {
+    color: #00fffb;
+}
+.litchiblue .area > h2.area-title {
+    border-bottom: solid 0.04rem #00fffb; 
+    text-shadow: 1px 1px 0.04rem rgba(0, 233, 255, 0.40);
+} */
+ div.rating-detail-pane {
+	top: 12%;
+    left: 5%;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: initial;
+    margin: 0 4% 2% 4%;
+    height: initial;
+}
+/* div.rating-detail-pane .rating-day{
+	height:50%;
+} */
+div.rating-detail-pane .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20%;
+    margin: 37px 0 0 0;
+    animation: slideright-keyframes 700ms ease 500ms 1 normal;
+    animation-fill-mode: backwards;
+}
+.rating-detail-pane .up .title{
+    color: #f97f32;
+    font-size: 0.28rem;	
+}
+div.rating-detail-pane .title h1{
+	font-size: 0.36rem;
+/*     width: 34%;
+    line-height: 44px; 
+    height: 44px;*/
+    margin: 0;
+}
+div.rating-detail-pane .title-icon{
+	color: #fe5802;
+/*     line-height: 49px;
+    height: 50px; */
+    font-size:0.35rem;
+    position: relative;
+    margin-right: 22px;
+}
+div.rating-detail-pane .content{
+    height: 80%; 
+    width: 100%; 
+    position: relative;
+}
+ .analysis-rating-page .remove {
+    opacity: 0;
+}

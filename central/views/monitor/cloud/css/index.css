@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    color: #ffe9ea;
+    font-family: "Microsoft Yahei", "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", Tahoma, Arial, STHeiti, sans-serif;
+}
+
+div {
+    position: absolute;
+}
+
+.cloud-page {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+@keyframes slideright-keyframes {
+    0% {
+        transform: translate(-1rem, 0);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+
+.gallery-cloud {
+    top: 14%;
+    left: 5%;
+    right: 5%;
+    bottom: 5%
+}
+
+.cloud-page .state-pie-pane {
+    top: 0;
+    left: 0;
+    right: 60%;
+    bottom: 50%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+}
+
+.cloud-page .space-pie-pane {
+    top: 50%;
+    left: 0;
+    right: 60%;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem;
+}
+
+.cloud-page .state-pie-pane > div,
+.cloud-page .space-pie-pane > div {
+    position: relative;
+}
+
+.cloud-page .pie-title {
+    flex-grow: 0;
+    font-size: 0.28rem;
+    color: #dd4444;
+    padding-left: 0.2rem;
+}
+
+.blue .cloud-page .pie-title{
+	color:#ddfcff;
+}
+
+.blue span.fa.fa-play {
+    color: #ff5800;
+}
+
+.lightblue .cloud-page .pie-title{
+	color:#ddfcff;
+}
+
+.lightblue span.fa.fa-play {
+    color: #ff5800;
+}
+
+.cloud-page .pie-title > .header-text {
+    padding-left: 0.1rem;
+}
+ 
+.cloud-page .pie-chart {
+    flex-grow: 1;
+}
+
+.cloud-page .bar-pane {
+    top: 0;
+    left: 40%;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: 0.2rem;
+}
+
+.cloud-page .bar-pane-title {
+    top: 0;
+    left: 40%;
+    right: 0;
+    height: 10%;
+    z-index: 1;
+    text-align: center;
+}
+
+.cloud-page .bar-pane-title > .arrow {
+    font-size: 0.18rem;
+    color: #dd4444;
+}
+
+.cloud-page .bar-pane-title > h3 {
+    display: inline-block;
+    font-size: 0.36rem;
+    color: #ffe9ea;
+    text-shadow: 0 0.02rem 0.04rem rgba(255, 0, 0, 0.60);
+    margin-top: 0;
+    margin-bottom: 0;
+}

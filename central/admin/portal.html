@@ -1,0 +1,72 @@
+<div style="position: absolute; top:0; bottom: 0; left: 0; right: 0;overflow: auto">
+
+<style type="text/css">
+#cavas {width: 925px; margin:10px auto;}
+#cavas .tile-item { position:relative; border:1px dashed #ccc; margin: 10px 10px 0 0; float: left; padding: 5px;}
+#cavas .tile-item .form-control {width: 70px; margin-top: 5px;}
+#cavas .tile-item .tile-remove {position:absolute; right: 5px; top: 0; color: #888;}
+#cavas .tile-item .tile-color {width: 110px;}
+#cavas .btn-tile-m {position:absolute; left: 120px;top:11px;}
+.modules-list {list-style: none; padding: 0; overflow: auto;}
+.modules-list>li {padding: 5px 10px; float: left;}
+.modules-list>li.active {background: #3b5998; color: #fff;}
+.modules-list>li.active a {color: #fff;}
+.loading {position: fixed; top: 100px; left: calc(50% - 100px); z-index: 999; background: #fff; border: 2px solid #ccc;text-align: center;width: 200px;line-height: 80px;}
+
+</style>
+<div data-ng-if="loading" class="loading"><i class="fa fa-spin fa-spinner"></i> 正在加载...</div>
+<div data-ng-if="Cavas.saving" class="loading"><i class="fa fa-spin fa-spinner"></i> 正在保存...</div>
+<div class="panel panel-default" style="margin: 20px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">主页配置</h3>
+  </div>
+  <div class="panel-body">
+  	<div id="cavas">
+  		<div data-ng-repeat="cell in Cavas.cells">
+  			<div class="tile-item" style="height:{{cell.rowspan*120 + (cell.rowspan -1)*10}}px;
+  				width: {{cell.colspan * 220+ (cell.colspan -1)*10}}px;
+  				">
+	  			<input minicolors="customSettings"
+				    id="color-input"
+				    class="form-control tile-color"
+				    type="text"
+				    data-ng-model="cell.color">
+	  			<button class="btn btn-primary btn-sm  btn-tile-m" data-ng-click="Cavas.module(cell)">选择模块</button>
+	  			<div class="form-inline">
+			   		<div class="form-group">
+					    <input type="number" class="form-control input-sm" placeholder="占行" data-ng-model="cell.rowspan">
+					    <input type="number" class="form-control input-sm" placeholder="占列" data-ng-model="cell.colspan">
+					</div>
+				</div>
+				<h4><i class="{{cell.icon}}"></i> {{cell.caption}}</h4>
+				<a href="javascript:;" data-ng-click="Cavas.remove(cell)" class="tile-remove"><i class="fa fa-times"></i></a>
+			</div>
+  		</div>
+  		<div style="clear:both;"></div>
+  	</div>
+  	
+  	<button class="btn btn-primary" data-ng-click="Cavas.addItem();"><i class="fa fa-plus"></i> 添加模块</button>
+  	<button class="btn btn-success" data-ng-click="Cavas.save();"><i class="fa fa-save"></i> 保存</button>
+  </div>
+</div>
+
+</div>
+
+
+<script type="text/ng-template" id="module_choose.html">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-title">模块选择</h3>
+        </div>
+        <div class="modal-body" id="modal-body">
+			<ul class="modules-list"><li 
+				data-ng-repeat="row in modules"
+				data-ng-class="{true:'active'}[selected==row]"><a href="javascript:;" data-ng-click="select(row)">{{row.caption}}</a></li>
+				<li style="clear: both;"></li>
+			</ul>
+			
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+			<button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+        </div>
+    </script>

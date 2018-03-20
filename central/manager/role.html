@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../3rd/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../3rd/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="css/default.css" />
+<link rel="stylesheet" href="css/index.css" />
+<style type="text/css">
+	.detail-body{
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: space-around;
+	}
+	
+	.role-list {
+  			list-style: none;
+		list-style: none;
+	    flex-grow: 1;
+	    margin: 10px;
+	    border: 1px solid #ddd;
+	    overflow-y: auto;
+	}
+	
+	.role-list-item {
+		display: block;
+	    padding: 10px 0;
+	    border-bottom: solid 1px #eee;
+	    font-size: 16px;
+	}
+	
+	.role-list-item > label {
+		padding-right: 10px;
+	}
+	
+</style>
+<script type="text/javascript" src="../3rd/jquery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../3rd/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../3rd/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/nova.utils.js"></script>
+<script type="text/javascript" src="../js/nova.framework.js"></script>
+<script type="text/javascript" src="js/role.js"></script>
+</head>
+<body id="page_role" class="mgr-page">
+	<div class="header">
+		<div class="pull-left toolbar">
+			<button name="BtnCreateRole" class="btn btn-success">
+				<i class="fa fa-plus"></i> <span>角色</span>
+			</button>
+			<button name="BtnDeleteRole" class="btn btn-danger">
+				<i class="fa fa-remove"></i> <span>删除角色</span>
+			</button>
+			<button name="BtnCreatePermission" class="btn btn-success" disabled style="display: none;">
+				<i class="fa fa-plus"></i> <span>权限</span>
+			</button>
+			<button name="BtnDeletePermission" class="btn btn-danger" disabled style="display: none;">
+				<i class="fa fa-remove"></i> <span>删除权限</span>
+			</button>
+		</div>
+		<div class="pull-right hide">
+			<ul class="tabs">
+				<li><a id="tab_role" href="javascript:;" class="active">角色</a></li>
+				<li><a id="tab_perm" href="javascript:;" >权限</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="list">
+		<ol class="roles"></ol>
+		<ol class="permissions" style="display: none;"></ol>
+	</div>
+	<div class="detail-div editor">
+		<div class="detail-title">
+			<h4>
+				<i class="fa fa-plus"></i><span>正在添加新角色</span>
+			</h4>
+			<div class="toolbar">
+					<input type="submit" class="btn btn-primary" name="BtnSaveAndNext"
+									data-loading-text="正在保存角色信息" value="保存并继续" />
+					<input type="submit" class="btn btn-primary" name="BtnSaveAndExit"
+									data-loading-text="正在保存角色信息" value="保存并关闭" />
+			</div>
+			<a href="javascript:;" class="close">×</a>
+		</div>
+		<div class="detail-body">
+			<form style="width: 100%;">
+				<div class="col-md-12">
+					<label><input type=checkbox name=UseCustomID> 自定义角色ID</label>
+				</div>
+				<div class="input-group input-sm"  style="width: 100%;">
+					<span class="input-group-addon">ID:</span>
+					<input type="text" class="form-control" name="RoleID" disabled placeholder="系统自动生成" maxlength="50">
+				</div>
+				<div class="input-group input-sm"  style="width: 100%;">
+					<span class="input-group-addon"><span class="required">*</span>角色名:</span>
+					<input type="text" class="form-control" name="RoleName" required placeholder="用于显示的角色名" maxlength="50">
+				</div>
+				<div class="input-group input-sm" style="width: 100%;">
+					<span class="input-group-addon">授予权限:</span>
+					<div class="form-control role-permissions navs nova-tree">
+						<div class="nova-tree">
+							<ol>
+								<li><i class="fa checkbox fa-square-o"></i><font>功能权限</font></li>
+								<ol class="me-list"></ol>
+							</ol>
+							<ol>
+								<li><i class="fa checkbox fa-square-o"></i><font>模块权限</font></li>
+								<ol class="perm-list"></ol>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12" style="visibility:hidden;">
+					<input type="submit" />
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    /* 		    height: 100%; */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: "微软雅黑", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", Tahoma, Arial, STHeiti, sans-serif;
+    background: #333645 url("../../../images/bg1920x1080.png") no-repeat fixed center;
+    background-size: cover;
+}
+
+.player-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.player-pane .video-container {
+    position: absolute;
+    top: 0%;
+    right: 0;
+    left: 0;
+    bottom:0;
+    z-index: 2;
+    text-align: center;
+}
+.player-pane .video-container .player{
+    width: 100%;
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    top: 0;
+    background: #020403;
+}
+
+.vodTransparent div.sewise-player-ui div.logo {
+    display: none !important;
+}
